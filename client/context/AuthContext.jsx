@@ -1,4 +1,4 @@
-import { Children, createContext, useEffect } from "react";
+import { createContext, useEffect } from "react";
 import axios from 'axios'
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -9,7 +9,7 @@ axios.defaults.baseURL = backendUrl;
 
 export const AuthContext = createContext();
 
-export const AuthProvider = ({ Children })=>{
+export const AuthProvider = ({ children  })=>{
 
     const [token, setToken] = useState(localStorage.getItem("token"));
     const [authUser, setAuthUser] = useState(null);
@@ -115,7 +115,7 @@ export const AuthProvider = ({ Children })=>{
 
     return (
         <AuthContext.Provider value={value}>
-        {Children}
+        {children}
          </AuthContext.Provider>
     )
 }
