@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import ChatContainer from '../components/ChatContainer'
 import RightSidebar from '../components/RightSidebar'
 import Sidebar from '../components/Sidebar'
 import { useState } from 'react'
+import { ChatContext } from '../../context/ChatContext'
 
 const HomePage = () => {
-  const [selectedUser, setSelectedUser] = useState(null) // Changed from false to null
+  
+  const {selectedUser} = useContext(ChatContext)
 
   return (
     <div className='border w-full h-screen sm:px-[15%] sm:py-[5%]'>
@@ -14,11 +16,11 @@ const HomePage = () => {
         {/* Mobile Layout: Show one component at a time */}
         <div className='md:hidden h-full'>
           {!selectedUser ? (
-            <Sidebar selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>
+            <Sidebar />
           ) : (
             <>
               <ChatContainer />
-              <RightSidebar selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>
+              <RightSidebar />
             </>
           )}
         </div>
@@ -34,11 +36,12 @@ const HomePage = () => {
           <Sidebar />
           
           {/* Chat Container - Always visible */}
-          <ChatContainer selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>
+          <ChatContainer 
+          />
           
           {/* Right Sidebar - Only visible when user is selected */}
           {selectedUser && (
-            <RightSidebar selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>
+            <RightSidebar />
           )}
         </div>
 
