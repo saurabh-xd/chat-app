@@ -17,7 +17,7 @@ const HomePage = () => {
             <Sidebar selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>
           ) : (
             <>
-              <ChatContainer selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>
+              <ChatContainer />
               <RightSidebar selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>
             </>
           )}
@@ -31,7 +31,7 @@ const HomePage = () => {
         }`}>
           
           {/* Sidebar - Always visible on desktop */}
-          <Sidebar selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>
+          <Sidebar />
           
           {/* Chat Container - Always visible */}
           <ChatContainer selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>
