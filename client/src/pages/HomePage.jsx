@@ -10,8 +10,8 @@ const HomePage = () => {
   const {selectedUser} = useContext(ChatContext)
 
   return (
-    <div className='border w-full h-screen sm:px-[15%] sm:py-[5%]'>
-      <div className='backdrop-blur-xl border-2 border-gray-600 rounded-2xl overflow-hidden h-full'>
+    <div className=' w-full h-screen '>
+      <div className='backdrop-blur-xl border border-white/10 h-full'>
         
         {/* Mobile Layout: Show one component at a time */}
         <div className='md:hidden h-full'>
