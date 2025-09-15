@@ -73,19 +73,19 @@ const {authUser, updateProfile} = useContext(AuthContext)
             required
             placeholder="Your name"
             className="p-2 border 
-          border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500"
+          border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
           />
           <textarea
             onChange={(e) => setBio(e.target.value)}
             value={bio}
             placeholder="Write profile bio"
             required
-            className="p-2 border focus:ring-violet-500 "
+            className="p-2 border focus:ring-teal-500 "
             rows={4}
           ></textarea>
           <button
             type="submit"
-            className="bg-gradient-to-r from-purple-400 to-violet-600
+            className="bg-gradient-to-r from-teal-400 to-teal-600
           text-white p-2 rounded-full text-lg cursor-pointer"
           >
             Save
