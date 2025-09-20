@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import assets from "../assets/assets";
 import { AuthContext } from "../../context/AuthContext";
+import {MessageCircleMore} from 'lucide-react'
 
 const ProfilePage = () => {
 
@@ -93,7 +94,7 @@ const {authUser, updateProfile} = useContext(AuthContext)
         </form>
         <img
           className={`max-w-44 aspect-square rounded-full mx-10 max-sm:mt-10 ${selectedImg && "rounded-full"}`}
-          src={authUser?.profilePic || assets.logo_icon}
+          src={authUser?.profilePic }
           alt=""
         />
       </div>

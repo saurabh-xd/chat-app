@@ -3,6 +3,7 @@ import assets, { messagesDummyData } from '../assets/assets'
 import { formatMessageTime } from '../lib/utils'
 import { ChatContext } from '../../context/ChatContext'
 import { AuthContext } from '../../context/AuthContext'
+import {MessageCircleMore} from 'lucide-react'
 
 const ChatContainer = () => {
 
@@ -110,8 +111,8 @@ const ChatContainer = () => {
   )
   : (
     <div className='flex flex-col items-center justify-center gap-2 text-gray-500 bg-white/10 '>
-      <img src={assets.logo_icon} className="max-w-16" />
-      <p className='text-lg font-medium text-white'>Chat anytime, anywhere</p>
+     < MessageCircleMore size={50} />
+      <p className='text-lg font-bold text-white'>Chat anytime, anywhere</p>
     </div>
   )
 }

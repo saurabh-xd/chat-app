@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { ChatContext } from "../../context/ChatContext";
+import {MessageCircleMore} from 'lucide-react'
 
 const Sidebar = () => {
 
@@ -26,7 +27,11 @@ getUsers()
     <div className={"bg-[#8185B2]/10 h-full p-5 rounded-xl overflow-y-scroll text-white "}>
       <div className="pb-5">
         <div className="flex justify-between items-center">
-          <img src={assets.logo} alt="logo" className="max-w-40" />
+
+        <div className="flex gap-2"> 
+            < MessageCircleMore  />
+          <h2>ChatMate</h2>
+        </div>
           <div className="relative py-2 group">
             <img
               src={assets.menu_icon}
