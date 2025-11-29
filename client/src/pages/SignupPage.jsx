@@ -3,55 +3,69 @@ import assets from '../assets/assets'
 import { useState } from 'react'
 import { AuthContext } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
-import { Loader2, Lock, Mail } from 'lucide-react'
+import { Loader2, Lock, Mail, User } from 'lucide-react'
 
-const LoginPage = () => {
+const SignupPage = () => {
 
-// const [currState, setCurrState] = useState("Sign up")
-// const [fullName, setFullName] = useState("")
+
+const [fullName, setFullName] = useState("")
 const [email, setEmail] = useState("")
 const [password, setPassword] = useState("")
-// const [bio, setBio] = useState("")
-const [isDataSubmitted, setIsDataSubmitted] = useState(false)
+const [bio, setBio] = useState("")
+
 
  const navigate = useNavigate();
-const { loading,login } = useContext(AuthContext)
+
+const { login,loading } = useContext(AuthContext)
 
 const onSubmitHandler = (event)=>{
   event.preventDefault();
- 
 
 
-  login('login', { email, password} )
+  login( 'signup' , {fullName, email, password, bio} )
 }
 
 
   return (
     <div className='min-h-screen bg-cover bg-center flex items-center justify-center  sm:justify-evenly max-sm:flex-col backdrop-blur-2xl'>
 
-     <div className='flex flex-col items-center justify-center gap-2'>
+    <div className='flex flex-col items-center justify-center gap-2'>
     <h2 className='text-neutral-100 text-6xl'>Welcome  to <span className='text-teal-500 font-bold'>ChatMate</span></h2>
     <p className='text-neutral-300 text-2xl'>Continue chatting with your mates instantly.</p>
    </div>
 
       <form onSubmit={onSubmitHandler}
         className=" border border-gray-700/50 bg-gradient-to-br from-gray-900/95 to-gray-800/95 backdrop-blur-xl text-white p-10 flex flex-col gap-6 rounded-2xl shadow-2xl w-full max-w-md">
+
+
         <div className='flex  justify-center'>
           <h2 className='font-medium text-4xl flex justify-between items-center'>
-        Login
-        
+          Sign up
+          
           
         </h2>
 
         </div>
         
 
+    
+        <div className='relative'>
+          <User className='absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400' />
+          <input
+            onChange={(e) => setFullName(e.target.value)}
+            value={fullName}
+            type="text"
+            className='w-full pl-11 pr-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200 text-white placeholder-gray-500'
+            placeholder='Full Name'
+            required
+          />
+        </div>
      
 
-      
+    
 
-     
-         <div className='relative'>
+   
+          <div className='relative'>
           <Mail className='absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400' />
           <input
             onChange={(e) => setEmail(e.target.value)}
@@ -62,7 +76,6 @@ const onSubmitHandler = (event)=>{
             className='w-full pl-11 pr-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200 text-white placeholder-gray-500'
           />
         </div>
-
 
          <div className='relative'>
           <Lock className='absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400' />
@@ -75,31 +88,36 @@ const onSubmitHandler = (event)=>{
             className='w-full pl-11 pr-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200 text-white placeholder-gray-500'
           />
         </div>
+        
+ 
+  
+
       
-     
+          {/* <textarea onChange={(e)=>setBio(e.target.value)} value={bio}
+          rows={4} className='p-2 border border-gray-500 rounded-md 
+          focus:outline-none focus:ring-2 focus:ring-teal-500 ' placeholder='provide a short bio...' required></textarea> */}
+      
 
-     
-
-       <button type='submit' className='py-3 bg-gradient-to-r from-teal-400 to-teal-700 text-white rounded-md cursor-pointer flex justify-center items-center gap-1 hover:opacity-90 '>
-         {loading ? (
+       <button type='submit' className='py-3 bg-gradient-to-r from-teal-400 to-teal-700 text-white rounded-md cursor-pointer flex items-center justify-center gap-1 hover:opacity-90'>
+        {loading ? (
           <>
           <Loader2 className='animate-spin'/>
-              Signing in...
+            Creating account...
             </>
         ): (
-"Login Now"
+"Create Account"
         )}
-         
+       
        </button>
 
-      
+   
 
        <div className='flex flex-col gap-2'>
        
-          <p className='text-sm text-gray-600'> Don't have an account?
-          <span onClick={()=>{navigate('/signup')}}
-          className='font-medium text-teal-500 cursor-pointer'> Create one</span></p>
-        
+          <p className='text-sm text-gray-600'>Already have an account? 
+          <span onClick={()=>{navigate('/login'); }}
+          className='font-medium text-teal-500 cursor-pointer'>Login here</span></p>
+     
        </div>
 
       </form>
@@ -108,4 +126,4 @@ const onSubmitHandler = (event)=>{
   )
 }
 
-export default LoginPage
+export default SignupPage
