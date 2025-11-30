@@ -28,8 +28,8 @@ const HomePage = () => {
         {/* Desktop Layout: Grid system */}
         <div className={`hidden md:grid h-full ${
           selectedUser 
-            ? 'grid-cols-[300px_1fr_280px] xl:grid-cols-[320px_1fr_300px]' 
-            : 'grid-cols-[300px_1fr] xl:grid-cols-[350px_1fr]'
+            ? 'grid-cols-[360px_1fr_280px] xl:grid-cols-[400px_1fr_300px]' 
+            : 'grid-cols-[360px_1fr] xl:grid-cols-[400px_1fr]'
         }`}>
           
           {/* Sidebar - Always visible on desktop */}
