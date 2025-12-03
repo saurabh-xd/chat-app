@@ -18,7 +18,7 @@ const RightSidebar = () => {
   },[messages])
 
   return selectedUser && (
-    <div className={"bg-[#8185B2]/10 text-white w-full relative overflow-y-scroll "}>
+    <div className={"bg-gray-900  border-l border-neutral-800 text-white w-full relative overflow-y-scroll "}>
       <div className='pt-16 flex flex-col items-center gap-2 text-xs font-light mx-auto'>
         <img src={selectedUser?.profilePic || assets.avatar_icon} className="w-20 aspect-[1/1] rounded-full" />
         <h1 className='px-10 text-xl font-medium mx-auto flex items-center gap-2'>

@@ -25,7 +25,7 @@ getUsers()
   },[onlineUsers])
 
   return (
-    <div className="h-full  bg-gray-900  pt-0  overflow-y-scroll text-white ">
+    <div className="h-full  bg-gray-900 border-r border-neutral-800 pt-0  overflow-y-scroll scroll-smooth text-white ">
 
      {/* header  */}
       <div className=" sticky bg-gray-900 top-0 p-4 pb-3 z-10 w-full border-b border-neutral-400">
@@ -77,7 +77,7 @@ getUsers()
 
 
 {/* users list  */}
-    <div className="flex flex-col gap-1 px-1 pb-5">
+    <div className="flex flex-col  gap-1 px-1 pb-5">
         {filteredUsers.map((user, index) => (
           <div
             onClick={() => {
