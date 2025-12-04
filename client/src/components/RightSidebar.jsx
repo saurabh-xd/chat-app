@@ -2,52 +2,85 @@ import React, { useContext, useEffect, useState } from 'react'
 import assets, { imagesDummyData } from '../assets/assets'
 import { ChatContext } from '../../context/ChatContext'
 import { AuthContext } from '../../context/AuthContext'
+import { LogOut, Image as ImageIcon } from 'lucide-react'
 
 const RightSidebar = () => {
-
-  const {selectedUser, messages} = useContext(ChatContext)
-  const {logout, onlineUsers} = useContext(AuthContext)
+  const { selectedUser, messages } = useContext(ChatContext)
+  const { logout, onlineUsers } = useContext(AuthContext)
   const [msgImages, setMsgImages] = useState([])
 
-  // get all the images from the messages and set them to state
-
-  useEffect(()=>{
+  useEffect(() => {
     setMsgImages(
-      messages.filter(msg=>msg.image).map(msg=>msg.image)
+      messages.filter(msg => msg.image).map(msg => msg.image)
     )
-  },[messages])
+  }, [messages])
 
   return selectedUser && (
-    <div className={"bg-gray-900  border-l border-neutral-800 text-white w-full relative overflow-y-scroll "}>
-      <div className='pt-16 flex flex-col items-center gap-2 text-xs font-light mx-auto'>
-        <img src={selectedUser?.profilePic || assets.avatar_icon} className="w-20 aspect-[1/1] rounded-full" />
-        <h1 className='px-10 text-xl font-medium mx-auto flex items-center gap-2'>
-         {onlineUsers.includes(selectedUser._id) && <p className='w-2 h-2 rounded-full bg-green-500'></p>} 
-          {selectedUser.fullName}
-        </h1>
-        <p className='px-10 mx-auto'>{selectedUser.bio}</p>
+    <div className="bg-gray-900 border-l border-gray-800 text-white h-full flex flex-col">
+      
+      {/* Profile Section */}
+      <div className='p-6 flex flex-col items-center border-b border-gray-800'>
+        <div className='relative mb-3'>
+          <img 
+            src={selectedUser?.profilePic || assets.avatar_icon} 
+            className="w-24 h-24 rounded-full object-cover border-2 border-gray-700" 
+          />
+          {onlineUsers.includes(selectedUser._id) && (
+            <span className='absolute bottom-1 right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-gray-900'></span>
+          )}
+        </div>
+        
+        <h2 className='text-lg font-semibold text-white'>{selectedUser.fullName}</h2>
+        <p className='text-xs text-gray-400 mt-1'>
+          {onlineUsers.includes(selectedUser._id) ? 'Active now' : 'Offline'}
+        </p>
+        {selectedUser.bio && (
+          <p className='text-sm text-gray-400 text-center mt-3 px-4'>{selectedUser.bio}</p>
+        )}
       </div>
 
-      <hr className='border-[#ffffff50] my-4' />
-
-      <div className='px-5 text-xs'>
-        <p>Media</p>
-        <div className='mt-2 max-h-[200px] overflow-y-scroll grid grid-cols-2 gap-4 opacity-80'>
-          {msgImages.map((url, index)=>(
-            <div key={index} onClick={()=> window.open(url)} 
-            className='cursor-pointer rounded'>
-              <img src={url} className="h-full rounded-md" />
-
-            </div>
-          ))}
+      {/* Media Section */}
+      <div className='flex-1 overflow-y-auto p-4'>
+        <div className='flex items-center justify-between mb-3'>
+          <h3 className='text-sm font-medium text-white flex items-center gap-2'>
+            <ImageIcon className='w-4 h-4 text-teal-500' />
+            Shared Media
+          </h3>
+          <span className='text-xs text-gray-500'>{msgImages.length}</span>
         </div>
 
+        {msgImages.length > 0 ? (
+          <div className='grid grid-cols-2 gap-2'>
+            {msgImages.map((url, index) => (
+              <div
+                key={index}
+                onClick={() => window.open(url)}
+                className='aspect-square cursor-pointer rounded-lg overflow-hidden hover:opacity-75 transition-opacity border border-gray-800'>
+                <img 
+                  src={url} 
+                  className="w-full h-full object-cover" 
+                  alt={`Media ${index + 1}`}
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className='flex flex-col items-center justify-center py-8 text-gray-500'>
+            <ImageIcon className='w-12 h-12 mb-2 opacity-50' />
+            <p className='text-xs'>No shared media yet</p>
+          </div>
+        )}
       </div>
 
-      <button onClick={()=> logout()} className='absolute bottom-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-teal-400 
-      to-teal-600 text-white border-none text-sm font-light py-2 px-20 rounded-full cursor-pointer '>
-        Logout
-      </button>
+      {/* Logout Button */}
+      <div className='p-4 border-t border-gray-800'>
+        <button
+          onClick={() => logout()}
+          className='w-full py-2.5 bg-gray-800 hover:bg-red-100/5 text-red-400  rounded-lg font-medium transition-colors flex items-center justify-center gap-2 border border-gray-700 cursor-pointer'>
+          <LogOut className='w-4 h-4' />
+          Logout
+        </button>
+      </div>
     </div>
   )
 }

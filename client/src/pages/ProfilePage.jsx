@@ -2,101 +2,122 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import assets from "../assets/assets";
 import { AuthContext } from "../../context/AuthContext";
-import {MessageCircleMore} from 'lucide-react'
+import { MessageCircleMore, Camera, ArrowLeft, Loader2 } from 'lucide-react'
 
 const ProfilePage = () => {
-
-const {authUser, updateProfile} = useContext(AuthContext)
+  const { authUser, updateProfile } = useContext(AuthContext)
 
   const [selectedImg, setSelectedImg] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [name, setName] = useState(authUser.fullName);
   const [bio, setBio] = useState(authUser.bio);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!selectedImg){
-      await updateProfile({fullname: name, bio});
+    setLoading(true);
+    
+    if (!selectedImg) {
+      await updateProfile({ fullName: name, bio });
+      setLoading(false);
       navigate('/');
       return
     }
+    
     const reader = new FileReader();
     reader.readAsDataURL(selectedImg);
-    reader.onload = async ()=>{
+    reader.onload = async () => {
       const base64Image = reader.result;
-      await updateProfile({profilePic: base64Image, fullName: name, bio})
+      await updateProfile({ profilePic: base64Image, fullName: name, bio })
+      setLoading(false);
       navigate("/");
     }
-    
   };
 
   return (
-    <div
-      className="min-h-screen bg-cover bg-no-repeat flex items-center
-    justify-center"
-    >
-      <div
-        className="w-5/6 max-w-2xl backdrop-blur-2xl text-gray-300 border-2
-      border-gray-600 flex items-center justify-between max-sm:flex-col-reverse rounded-lg"
-      >
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col gap-5 p-10 flex-1"
-        >
-          <h3 className="text-lg">Profile details</h3>
-          <label
-            htmlFor="avatar"
-            className="flex items-center gap-3 cursor-pointer"
-          >
-            <input
-              onChange={(e) => setSelectedImg(e.target.files[0])}
-              type="file"
-              id="avatar"
-              accept=".png, .jpg, .jpeg"
-              hidden
-            />
-            <img
-              src={
-                selectedImg
-                  ? URL.createObjectURL(selectedImg)
-                  : assets.avatar_icon
-              }
-              alt=""
-              className={`w-12 h-12 ${selectedImg && "rounded-full"}`}
-            />
-            upload profile image
-          </label>
+    <div className="min-h-screen bg-cover bg-no-repeat flex items-center justify-center p-4">
+      <div className="w-full max-w-2xl bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl overflow-hidden">
+        
+        
 
-          <input
-            onChange={(e) => setName(e.target.value)}
-            value={name}
-            type="text"
-            required
-            placeholder="Your name"
-            className="p-2 border 
-          border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
-          />
-          <textarea
-            onChange={(e) => setBio(e.target.value)}
-            value={bio}
-            placeholder="Write profile bio"
-            required
-            className="p-2 border focus:ring-teal-500 "
-            rows={4}
-          ></textarea>
-          <button
-            type="submit"
-            className="bg-gradient-to-r from-teal-400 to-teal-600
-          text-white p-2 rounded-full text-lg cursor-pointer"
-          >
-            Save
-          </button>
-        </form>
-        <img
-          className={`max-w-44 aspect-square rounded-full mx-10 max-sm:mt-10 ${selectedImg && "rounded-full"}`}
-          src={authUser?.profilePic }
-          alt=""
-        />
+        <div className="p-8">
+          {/* Profile Picture Section */}
+          <div className="flex flex-col items-center mb-8">
+            <div className="relative">
+              <img
+                src={selectedImg ? URL.createObjectURL(selectedImg) : authUser?.profilePic || assets.avatar_icon}
+                alt="Profile"
+                className="w-30 h-30 rounded-full object-cover border-4 border-gray-800"
+              />
+              <label
+                htmlFor="avatar"
+                className="absolute bottom-0 right-0 p-2.5 bg-teal-500 hover:bg-teal-600 rounded-full cursor-pointer transition-colors shadow-lg">
+                <Camera className="w-5 h-5 text-white" />
+                <input
+                  onChange={(e) => setSelectedImg(e.target.files[0])}
+                  type="file"
+                  id="avatar"
+                  accept=".png, .jpg, .jpeg"
+                  hidden
+                />
+              </label>
+            </div>
+            <p className="text-neutral-300 text-lg font-medium mt-3">Edit Profile</p>
+          </div>
+
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Name Input */}
+            <div>
+              <label className="block text-gray-400 text-sm mb-2">Full Name</label>
+              <input
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+                type="text"
+                required
+                placeholder="Your name"
+                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-transparent transition-all"
+              />
+            </div>
+
+            {/* Bio Input */}
+            <div>
+              <label className="block text-gray-400 text-sm mb-2">Bio</label>
+              <textarea
+                onChange={(e) => setBio(e.target.value)}
+                value={bio}
+                placeholder="Write something about yourself..."
+                required
+                rows={4}
+                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-transparent transition-all resize-none"
+              ></textarea>
+              <p className="text-gray-500 text-xs mt-1">{bio.length}/150 characters</p>
+            </div>
+
+            {/* Buttons */}
+            <div className="flex gap-3 pt-4">
+              <button
+                type="button"
+                onClick={() => navigate('/')}
+                className="flex-1 py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-lg font-medium transition-colors cursor-pointer">
+                Cancel
+              </button>
+              <button
+                type="submit"
+                disabled={loading}
+                className="flex-1 py-3 bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white rounded-lg font-medium transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+                {loading ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Saving...
+                  </>
+                ) : (
+                  'Save Changes'
+                )}
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
