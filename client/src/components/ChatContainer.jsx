@@ -8,11 +8,36 @@ import {
   EllipsisVertical,
   Image,
   MessageCircleMore,
+  MessageSquare,
   Phone,
+  Radio,
   Search,
   Send,
   SendHorizontal,
 } from "lucide-react";
+import { toast } from "sonner";
+
+const features = [
+  {
+    id: 1,
+    icon: MessageSquare,
+    title: "Send Messages",
+    description: "Chat with your friends instantly",
+  },
+  {
+    id: 2,
+    icon: Image,
+    title: "Share Media",
+    description: "Send photos and images easily",
+  },
+  {
+    id: 3,
+    icon: Radio,
+    title: "Stay Connected",
+    description: "Real-time online status",
+  },
+];
+
 
 const ChatContainer = () => {
   const { messages, selectedUser, setSelectedUser, sendMessage, getMessages } =
@@ -87,7 +112,7 @@ const ChatContainer = () => {
           </div>
         </div>
 
-        <div className="flex item-center justify-center text-gray-400 gap-6 ">
+        <div className="flex items-center justify-center text-gray-400 gap-6 ">
           <Phone className='w-5 h-5 cursor-pointer hover:text-white' />
           <Search className='w-5 h-5 cursor-pointer hover:text-white' />
         
@@ -179,11 +204,30 @@ const ChatContainer = () => {
       </div>
     </div>
   ) : (
-    <div className="flex flex-col items-center justify-center gap-2 text-gray-500 bg-white/10 ">
-      <MessageCircleMore size={50} />
-      <p className="text-lg font-bold text-white">Chat anytime, anywhere</p>
-    </div>
+   <div className="flex flex-col items-center justify-center h-full  px-8">
+  <div className="size-24 rounded-full bg-teal-500/10 flex items-center justify-center mb-6">
+    <MessageCircleMore size={56} className="text-teal-500" />
+  </div>
+  
+  <h2 className="text-2xl font-bold text-white mb-2">Welcome to ChatMate</h2>
+  <p className="text-gray-400 text-center mb-8">Select a chat to start messaging</p>
+  
+  <div className="grid gap-4 max-w-md">
+    {
+      features.map((feature,idx)=>(
+        <div key={feature.id} className="flex items-center gap-4 p-4 bg-gray-800 rounded-lg">
+           <feature.icon className="size-7 text-teal-500 "/>
+           <div>
+            <h3 className="text-white font-medium ">{feature.title}</h3>
+        <p className="text-sm text-gray-400">{feature.description}</p>
+           </div>
+        </div>
+      ))
+    }
+   </div>
+</div>
   );
 };
 
 export default ChatContainer;
+
