@@ -4,6 +4,8 @@ import { formatMessageTime } from "../lib/utils";
 import { ChatContext } from "../../context/ChatContext";
 import { AuthContext } from "../../context/AuthContext";
 import {
+  ArrowBigUp,
+  ArrowLeft,
   ChevronLeft,
   EllipsisVertical,
   Image,
@@ -89,9 +91,9 @@ const ChatContainer = () => {
   return selectedUser ? (
     <div className="h-full overflow-scroll relative backdrop-blur-lg">
       {/* header  */}
-      <div className="flex items-center justify-between py-2.5 bg-gray-900  px-5 border-b border-neutral-700">
-        <div className="flex items-center justify-center gap-3">
-          
+      <div className="flex items-center justify-between py-2.5 px-2 bg-gray-900  md:px-5 border-b border-neutral-700">
+        <div className="flex items-center justify-center gap-3 ">
+          <ArrowLeft  onClick={() => setSelectedUser(null)} className="md:hidden size-6 cursor-pointer text-gray-400 hover:text-white " />
           <img
             src={selectedUser.profilePic || assets.avatar_icon}
             className="size-10 rounded-full"
@@ -117,7 +119,7 @@ const ChatContainer = () => {
           <Search className='w-5 h-5 cursor-pointer hover:text-white' />
         
           <EllipsisVertical className=' w-5 h-5 cursor-pointer hover:text-white' />
-         <ChevronLeft  onClick={() => setSelectedUser(null)} className="md:hidden w-6 h-6 cursor-pointer hover:text-white" />
+         
          
         </div>
       </div>
@@ -183,21 +185,21 @@ const ChatContainer = () => {
             accept="image/png, image/jpeg"
             hidden
           />
-          <label htmlFor="image" className="cursor-pointer">
+          <label htmlFor="image" className="cursor-pointer p-2 hover:bg-neutral-600/20 rounded-full">
             {/* <img
               src={assets.gallery_icon}
               alt=""
               className="w-5 mr-2 cursor-pointer"
             /> */}
-            <Image className='w-5 h-5 text-gray-400 hover:text-white' />
+            <Image className='size-5 text-neutral-400 ' />
           </label>
         </div>
 
         <button
-          className="p-2.5 bg-teal-500 hover:bg-teal-600 rounded-full text-neutral-800  cursor-pointer"
+          className="p-2.5 bg-teal-600 hover:bg-teal-700 rounded-full text-neutral-100  cursor-pointer"
           onClick={handleSendMessage}
         >
-          <SendHorizontal  />
+          <ArrowBigUp  strokeWidth={2.5} />
         </button>
         {/* <img  onClick={handleSendMessage}
       src={assets.send_button} className="w-7 cursor-pointer" /> */}
