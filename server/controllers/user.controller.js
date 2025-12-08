@@ -57,7 +57,7 @@ export const login = async (req, res)=>{
         const token = generateToken(userData._id)
 
         res.json({success: true, userData, token, 
-            message: "loggedIn successfully"
+            message: "logged In successfully"
         })
         
     } catch (error) {
