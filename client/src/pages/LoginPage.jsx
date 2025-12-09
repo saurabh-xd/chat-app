@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import assets from '../assets/assets'
 import { useState } from 'react'
 import { AuthContext } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
@@ -7,11 +6,9 @@ import { Loader2, Lock, Mail } from 'lucide-react'
 
 const LoginPage = () => {
 
-// const [currState, setCurrState] = useState("Sign up")
-// const [fullName, setFullName] = useState("")
+
 const [email, setEmail] = useState("")
 const [password, setPassword] = useState("")
-// const [bio, setBio] = useState("")
 const [isDataSubmitted, setIsDataSubmitted] = useState(false)
 
  const navigate = useNavigate();
@@ -27,17 +24,17 @@ const onSubmitHandler = (event)=>{
 
 
   return (
-    <div className='min-h-screen bg-cover bg-center flex items-center justify-center  sm:justify-evenly max-sm:flex-col backdrop-blur-2xl'>
+    <div className='min-h-screen bg-cover bg-center flex items-center justify-center  sm:justify-evenly max-sm:flex-col backdrop-blur-2xl px-4'>
 
-     <div className='flex flex-col items-center justify-center gap-2'>
-    <h2 className='text-neutral-100 text-6xl'>Welcome  to <span className='text-teal-500 font-bold'>ChatMate</span></h2>
-    <p className='text-neutral-300 text-2xl'>Continue chatting with your mates instantly.</p>
+     <div className='flex flex-col items-center justify-center md:gap-2 gap-0 max-sm:mb-8'>
+    <h2 className='text-neutral-100 md:text-6xl text-3xl'>Welcome  to <span className='text-teal-500 font-bold'>ChatMate</span></h2>
+    <p className='text-neutral-300 md:text-2xl text-sm'>Continue chatting with your mates instantly.</p>
    </div>
 
       <form onSubmit={onSubmitHandler}
-        className=" border border-gray-700/50 bg-gradient-to-br from-gray-900/95 to-gray-800/95 backdrop-blur-xl text-white p-10 flex flex-col gap-6 rounded-2xl shadow-2xl w-full max-w-md">
+        className=" border border-gray-700/50 bg-gradient-to-br from-gray-900/95 to-gray-800/95 backdrop-blur-xl text-white md:p-10 p-6 flex flex-col md:gap-6  gap-5 rounded-2xl shadow-2xl w-full max-w-md ">
         <div className='flex  justify-center'>
-          <h2 className='font-medium text-4xl flex justify-between items-center'>
+          <h2 className='font-medium text-3xl md:text-4xl flex justify-between items-center'>
         Login
         
           
@@ -59,7 +56,7 @@ const onSubmitHandler = (event)=>{
             type="email"
             placeholder='Email Address'
             required
-            className='w-full pl-11 pr-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200 text-white placeholder-gray-500'
+            className='w-full text-sm md:text-base pl-11 pr-4v py-2.5 md:py-3 bg-gray-800/50 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200 text-white placeholder-gray-500'
           />
         </div>
 
@@ -72,7 +69,7 @@ const onSubmitHandler = (event)=>{
             type="password"
             placeholder='Password'
             required
-            className='w-full pl-11 pr-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200 text-white placeholder-gray-500'
+            className='w-full text-sm md:text-base pl-11 pr-4 py-2.5 md:py-3 bg-gray-800/50 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200 text-white placeholder-gray-500'
           />
         </div>
       
@@ -80,7 +77,7 @@ const onSubmitHandler = (event)=>{
 
      
 
-       <button type='submit' className='py-3 bg-gradient-to-r from-teal-400 to-teal-700 text-white rounded-md cursor-pointer flex justify-center items-center gap-1 hover:opacity-90 '>
+       <button type='submit' className='py-2.5 text-sm md:text-base md:py-3 bg-gradient-to-r from-teal-400 to-teal-700 text-white rounded-md cursor-pointer flex justify-center items-center gap-1 hover:opacity-90 '>
          {loading ? (
           <>
           <Loader2 className='animate-spin'/>
@@ -96,7 +93,7 @@ const onSubmitHandler = (event)=>{
 
        <div className='flex flex-col gap-2'>
        
-          <p className='text-sm text-gray-600'> Don't have an account?
+          <p className='md:text-sm text-xs text-gray-600'> Don't have an account?
           <span onClick={()=>{navigate('/signup')}}
           className='font-medium text-teal-500 cursor-pointer'> Create one</span></p>
         
