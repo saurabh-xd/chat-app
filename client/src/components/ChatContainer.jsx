@@ -96,7 +96,7 @@ const ChatContainer = () => {
           <ArrowLeft  onClick={() => setSelectedUser(null)} className="md:hidden size-6 cursor-pointer text-gray-400 hover:text-white " />
           <img
             src={selectedUser.profilePic || assets.avatar_icon}
-            className="size-10 rounded-full"
+            className="size-10 rounded-full object-cover"
           />
 
           <div>
@@ -156,7 +156,7 @@ const ChatContainer = () => {
                     ? authUser?.profilePic || assets.avatar_icon
                     : selectedUser?.profilePic || assets.avatar_icon
                 }
-                className="w-7 rounded-full"
+                className="w-7 rounded-full object-cover"
               />
               <p className="text-gray-500">
                 {formatMessageTime(msg.createdAt)}

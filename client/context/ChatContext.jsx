@@ -9,18 +9,26 @@ export const ChatProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [unseenMessages, setUnseenMessages] = useState({});
+  const [loadingUsers, setLoadingUsers] = useState(true);
+
 
   const { socket, axios } = useContext(AuthContext);
 
   // function to get all users for sidebar
   const getUsers = async () => {
     try {
+      setLoadingUsers(true);
       const { data } = await axios.get("/api/messages/users");
       if (data.success) {
         setUsers(data.users);
         setUnseenMessages(data.unseenMessages);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+      
+    } finally{
+      setLoadingUsers(false);
+    }
   };
 
   // function to get messages for selected user
@@ -92,7 +100,10 @@ export const ChatProvider = ({ children }) => {
     setSelectedUser,
     unseenMessages,
     setUnseenMessages,
-    getMessages
+    getMessages,
+    loadingUsers,
+setLoadingUsers,
+
   };
   return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;
 };

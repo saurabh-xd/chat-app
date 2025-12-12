@@ -5,10 +5,11 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { ChatContext } from "../../context/ChatContext";
 import {Menu, MessageCircleMore, Search, X} from 'lucide-react'
+import Skeleton from "./ui/skeleton";
 
 const Sidebar = () => {
 
-const {getUsers, users, selectedUser, setSelectedUser, unseenMessages, setUnseenMessages} = useContext(ChatContext);
+const {getUsers, users, selectedUser, setSelectedUser, unseenMessages, setUnseenMessages, loadingUsers} = useContext(ChatContext);
 
 
 const {logout, onlineUsers} = useContext(AuthContext)
@@ -24,7 +25,10 @@ const [input, setInput] = useState("")
 getUsers()
   },[onlineUsers])
 
+  
+
   return (
+   
     <div className="h-full  bg-gray-900 border-r border-neutral-800 pt-0  overflow-y-scroll scroll-smooth text-white ">
 
      {/* header  */}
@@ -77,7 +81,15 @@ getUsers()
 
 
 {/* users list  */}
-    <div className="flex flex-col  gap-1 px-1 pb-5">
+
+{loadingUsers ? (
+  <div className="flex flex-col  px-1 pb-5">
+    {[1,2,3,4,5,6,7].map((i) => (
+      <Skeleton key={i} />
+    ))}
+  </div>
+) :
+  ( <div className="flex flex-col   px-1 pb-5">
         {filteredUsers.map((user, index) => (
           <div
             onClick={() => {
@@ -85,12 +97,12 @@ getUsers()
               setUnseenMessages(prev => ({ ...prev, [user._id]: 0 }))
             }}
             key={user._id || index}
-            className={`relative flex items-center gap-3 p-3 rounded-lg cursor-pointer  ${selectedUser?._id === user._id ? 'bg-teal-500/40' : 'hover:bg-gray-800 '}`}>
+            className={`relative flex items-center gap-3 p-3 rounded-lg cursor-pointer border-y border-neutral-800/40  ${selectedUser?._id === user._id ? 'bg-teal-500/40' : 'hover:bg-gray-800 '}`}>
 
             <img
               src={user?.profilePic || assets.avatar_icon}
               alt=""
-              className="w-14 h-14 rounded-full"
+              className="w-14 h-14 rounded-full object-cover"
             />
 
             <div className="flex-1">
@@ -108,6 +120,7 @@ getUsers()
           </div>
         ))}
       </div>
+  )}
 
     </div>
   );
