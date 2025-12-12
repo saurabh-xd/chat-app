@@ -40,19 +40,19 @@ const ProfilePage = () => {
         
         
 
-        <div className="p-8">
+        <div className="md:p-8 p-6">
           {/* Profile Picture Section */}
-          <div className="flex flex-col items-center mb-8">
+          <div className="flex flex-col items-center md:mb-8 mb-6">
             <div className="relative">
               <img
                 src={selectedImg ? URL.createObjectURL(selectedImg) : authUser?.profilePic || assets.avatar_icon}
                 alt="Profile"
-                className="w-30 h-30 rounded-full object-cover border-4 border-gray-800"
+                className="md:size-30 size-25 rounded-full object-cover border-4 border-gray-800"
               />
               <label
                 htmlFor="avatar"
-                className="absolute bottom-0 right-0 p-2.5 bg-teal-500 hover:bg-teal-600 rounded-full cursor-pointer transition-colors shadow-lg">
-                <Camera className="w-5 h-5 text-white" />
+                className="absolute bottom-0 right-0 md:p-2.5 p-2 bg-teal-500 hover:bg-teal-600 rounded-full cursor-pointer transition-colors shadow-lg">
+                <Camera className="md:size-5 size-4 text-white" />
                 <input
                   onChange={(e) => setSelectedImg(e.target.files[0])}
                   type="file"
@@ -62,11 +62,11 @@ const ProfilePage = () => {
                 />
               </label>
             </div>
-            <p className="text-neutral-300 text-lg font-medium mt-3">Edit Profile</p>
+            <p className="text-neutral-300  text-lg font-medium mt-3">Edit Profile</p>
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="md:space-y-5 space-y-4">
             {/* Name Input */}
             <div>
               <label className="block text-gray-400 text-sm mb-2">Full Name</label>
@@ -76,7 +76,7 @@ const ProfilePage = () => {
                 type="text"
                 required
                 placeholder="Your name"
-                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-transparent transition-all"
+                className="w-full px-4  md:py-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-transparent transition-all"
               />
             </div>
 
@@ -89,7 +89,7 @@ const ProfilePage = () => {
                 placeholder="Write something about yourself..."
                 required
                 rows={4}
-                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-transparent transition-all resize-none"
+                className="w-full px-4 md:py-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-transparent transition-all resize-none"
               ></textarea>
               <p className="text-gray-500 text-xs mt-1">{bio.length}/150 characters</p>
             </div>
