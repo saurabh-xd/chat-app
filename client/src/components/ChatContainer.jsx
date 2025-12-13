@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import assets, { messagesDummyData } from "../assets/assets";
+import assets from "../assets/assets";
 import { formatMessageTime } from "../lib/utils";
 import { ChatContext } from "../../context/ChatContext";
 import { AuthContext } from "../../context/AuthContext";
 import {
   ArrowBigUp,
   ArrowLeft,
-  ChevronLeft,
   EllipsisVertical,
   Image,
   MessageCircleMore,
@@ -14,8 +13,6 @@ import {
   Phone,
   Radio,
   Search,
-  Send,
-  SendHorizontal,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -39,7 +36,6 @@ const features = [
     description: "Real-time online status",
   },
 ];
-
 
 const ChatContainer = () => {
   const { messages, selectedUser, setSelectedUser, sendMessage, getMessages } =
@@ -93,7 +89,10 @@ const ChatContainer = () => {
       {/* header  */}
       <div className="flex items-center justify-between py-2.5 px-2 bg-gray-900  md:px-5 border-b border-neutral-700">
         <div className="flex items-center justify-center gap-3 ">
-          <ArrowLeft  onClick={() => setSelectedUser(null)} className="md:hidden size-6 cursor-pointer text-gray-400 hover:text-white " />
+          <ArrowLeft
+            onClick={() => setSelectedUser(null)}
+            className="md:hidden size-6 cursor-pointer text-gray-400 hover:text-white "
+          />
           <img
             src={selectedUser.profilePic || assets.avatar_icon}
             className="size-10 rounded-full object-cover"
@@ -115,12 +114,10 @@ const ChatContainer = () => {
         </div>
 
         <div className="flex items-center justify-center text-gray-400 gap-6 ">
-          <Phone className='w-5 h-5 cursor-pointer hover:text-white' />
-          <Search className='w-5 h-5 cursor-pointer hover:text-white' />
-        
-          <EllipsisVertical className=' w-5 h-5 cursor-pointer hover:text-white' />
-         
-         
+          <Phone className="w-5 h-5 cursor-pointer hover:text-white" />
+          <Search className="w-5 h-5 cursor-pointer hover:text-white" />
+
+          <EllipsisVertical className=" w-5 h-5 cursor-pointer hover:text-white" />
         </div>
       </div>
 
@@ -185,13 +182,11 @@ const ChatContainer = () => {
             accept="image/png, image/jpeg"
             hidden
           />
-          <label htmlFor="image" className="cursor-pointer p-2 hover:bg-neutral-600/20 rounded-full">
-            {/* <img
-              src={assets.gallery_icon}
-              alt=""
-              className="w-5 mr-2 cursor-pointer"
-            /> */}
-            <Image className='size-5 text-neutral-400 ' />
+          <label
+            htmlFor="image"
+            className="cursor-pointer p-2 hover:bg-neutral-600/20 rounded-full"
+          >
+            <Image className="size-5 text-neutral-400 " />
           </label>
         </div>
 
@@ -199,37 +194,39 @@ const ChatContainer = () => {
           className="p-2.5 bg-teal-600 hover:bg-teal-700 rounded-full text-neutral-100  cursor-pointer"
           onClick={handleSendMessage}
         >
-          <ArrowBigUp  strokeWidth={2.5} />
+          <ArrowBigUp strokeWidth={2.5} />
         </button>
-        {/* <img  onClick={handleSendMessage}
-      src={assets.send_button} className="w-7 cursor-pointer" /> */}
       </div>
     </div>
   ) : (
-   <div className="flex flex-col items-center justify-center h-full  px-8">
-  <div className="size-24 rounded-full bg-teal-500/10 flex items-center justify-center mb-6">
-    <MessageCircleMore size={56} className="text-teal-500" />
-  </div>
-  
-  <h2 className="text-2xl font-bold text-white mb-2">Welcome to ChatMate</h2>
-  <p className="text-gray-400 text-center mb-8">Select a chat to start messaging</p>
-  
-  <div className="grid gap-4 max-w-md">
-    {
-      features.map((feature,idx)=>(
-        <div key={feature.id} className="flex items-center gap-4 p-4 bg-gray-800 rounded-lg">
-           <feature.icon className="size-7 text-teal-500 "/>
-           <div>
-            <h3 className="text-white font-medium ">{feature.title}</h3>
-        <p className="text-sm text-gray-400">{feature.description}</p>
-           </div>
-        </div>
-      ))
-    }
-   </div>
-</div>
+    <div className="flex flex-col items-center justify-center h-full  px-8">
+      <div className="size-24 rounded-full bg-teal-500/10 flex items-center justify-center mb-6">
+        <MessageCircleMore size={56} className="text-teal-500" />
+      </div>
+
+      <h2 className="text-2xl font-bold text-white mb-2">
+        Welcome to ChatMate
+      </h2>
+      <p className="text-gray-400 text-center mb-8">
+        Select a chat to start messaging
+      </p>
+
+      <div className="grid gap-4 max-w-md">
+        {features.map((feature, idx) => (
+          <div
+            key={feature.id}
+            className="flex items-center gap-4 p-4 bg-gray-800 rounded-lg"
+          >
+            <feature.icon className="size-7 text-teal-500 " />
+            <div>
+              <h3 className="text-white font-medium ">{feature.title}</h3>
+              <p className="text-sm text-gray-400">{feature.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 
 export default ChatContainer;
-

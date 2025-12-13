@@ -5,7 +5,7 @@ export default function Skeleton() {
      
 
 
-      <div className="flex flex-col gap- px-1 py-2">
+      <div className="flex flex-col px-1 py-2">
        
           <div  className="flex items-center gap-3 p-3 bg-gray-800 rounded-lg animate-pulse">
             <div className="w-14 h-14 rounded-full bg-gray-700"></div>

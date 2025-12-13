@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import assets, { imagesDummyData } from '../assets/assets'
+import assets from '../assets/assets'
 import { ChatContext } from '../../context/ChatContext'
 import { AuthContext } from '../../context/AuthContext'
 import { LogOut, Image as ImageIcon } from 'lucide-react'

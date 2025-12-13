@@ -9,7 +9,6 @@ const LoginPage = () => {
 
 const [email, setEmail] = useState("")
 const [password, setPassword] = useState("")
-const [isDataSubmitted, setIsDataSubmitted] = useState(false)
 
  const navigate = useNavigate();
 const { loading,login } = useContext(AuthContext)
